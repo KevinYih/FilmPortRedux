@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FilmPort + User Icon</title>
+  <style>
+    body {
+      background-color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      background-color: #1e293b;
+      padding: 16px 32px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      color: #f8fafc;
+    }
+
+    .logo .icon {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #f97316;
+      border-radius: 6px;
+      position: relative;
+      margin-right: 12px;
+      box-shadow: 0 0 10px #f97316aa;
+    }
+
+    .logo .icon::before,
+    .logo .icon::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: #f97316;
+      border-radius: 50%;
+      top: 6px;
+    }
+
+    .logo .icon::before {
+      left: 6px;
+    }
+
+    .logo .icon::after {
+      right: 6px;
+    }
+
+    .logo .text {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .logo .text span {
+      color: #f97316;
+    }
+
+    .user-icon {
+      width: 64px;
+      height: 64px;
+      position: relative;
+      border-radius: 50%;
+      background-color: #1e293b;
+      border: 4px solid #f97316;
+      box-shadow: 0 0 12px #f97316aa;
+    }
+
+    .user-icon::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background-color: #f97316;
+      border-radius: 50%;
+    }
+
+    .user-icon::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 16px;
+      background-color: #f97316;
+      border-radius: 10px / 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <!-- FilmPort Logo -->
+    <div class="logo">
+      <div class="icon"></div>
+      <div class="text">
+        Film<span>Port</span>
+      </div>
+    </div>
+
+    <!-- User Icon -->
+    <div class="user-icon"></div>
+  </div>
+</body>
+</html>
