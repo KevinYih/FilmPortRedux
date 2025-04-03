@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import "./App.css";
-import Home from "./pages/Home";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 {
   /* <header className="p-4 bg-blue-600 text-white flex space-x-4">
@@ -14,7 +15,11 @@ import Home from "./pages/Home";
 function App() {
   return (
     <div>
-      <Outlet />
+      <Header />
+      <div className="pt-16">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 }

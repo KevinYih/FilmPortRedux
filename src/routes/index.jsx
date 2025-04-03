@@ -5,17 +5,6 @@ import ExplorePage from "../pages/ExplorePage";
 import SearchPage from "../pages/SearchPage";
 import DetailsPage from "../pages/DetailsPage";
 
-// {
-//   path: "/",
-//   element: <App />,
-//   children: [
-//     { path: "", element: <Home /> },
-//     { path: "explore", element: <ExplorePage /> },
-//     { path: "details", element: <DetailsPage /> },
-//     { path: "search", element: <SearchPage /> },
-//   ],
-// },
-
 const router = createBrowserRouter([
   {
     path: "/",
