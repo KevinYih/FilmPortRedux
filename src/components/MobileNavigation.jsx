@@ -10,6 +10,7 @@ const MobileNavigation = () => {
     <section className="lg:hidden h-14 bg-neutral-600 opacity-75 fixed bottom-0 w-full">
       <div className="flex items-center justify-between h-full text-neutral-400">
         {mobileNavigation.map((nav, index) => {
+          console.log(index);
           return (
             <div key={nav.label}>
               <NavLink to={nav.href} className={({ isActive }) => `px-5 flex h-full items-center flex-col justify-center ${isActive && "text-orange-500"}`}>

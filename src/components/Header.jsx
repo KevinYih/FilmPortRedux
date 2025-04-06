@@ -27,9 +27,10 @@ const Header = () => {
         </Link>
         <nav className="hidden lg:flex space-x-6">
           {navigation.map((nav, index) => {
+            console.log(index);
             return (
               <div key={nav.label}>
-                <NavLink  to={nav.href} className={({ isActive }) => `hover:text-neutral-100 ${isActive && "text-neutral-100"}`}>
+                <NavLink to={nav.href} className={({ isActive }) => `hover:text-neutral-100 ${isActive && "text-neutral-100"}`}>
                   {nav.label}
                 </NavLink>
               </div>
