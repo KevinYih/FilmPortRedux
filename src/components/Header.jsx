@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FilmportLogo from "./FilmportLogo";
 import { Link, NavLink, useNavigate } from "react-router";
 import FilmportUserIcon from "./FilmportUserIcon";
@@ -28,8 +28,8 @@ const Header = () => {
         <nav className="hidden lg:flex space-x-6">
           {navigation.map((nav, index) => {
             return (
-              <div>
-                <NavLink key={nav.label} to={nav.href} className={({ isActive }) => `hover:text-neutral-100 ${isActive && "text-neutral-100"}`}>
+              <div key={nav.label}>
+                <NavLink  to={nav.href} className={({ isActive }) => `hover:text-neutral-100 ${isActive && "text-neutral-100"}`}>
                   {nav.label}
                 </NavLink>
               </div>

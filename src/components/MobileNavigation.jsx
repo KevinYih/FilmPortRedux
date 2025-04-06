@@ -11,11 +11,11 @@ const MobileNavigation = () => {
       <div className="flex items-center justify-between h-full text-neutral-400">
         {mobileNavigation.map((nav, index) => {
           return (
-            <>
-              <NavLink key={index} to={nav.href} className={({ isActive }) => `px-10 flex h-full items-center flex-col justify-center ${isActive && "text-orange-500"}`}>
+            <div key={nav.label}>
+              <NavLink to={nav.href} className={({ isActive }) => `px-5 flex h-full items-center flex-col justify-center ${isActive && "text-orange-500"}`}>
                 <div className="text-3xl">{nav.icon}</div>
               </NavLink>
-            </>
+            </div>
           );
         })}
       </div>
