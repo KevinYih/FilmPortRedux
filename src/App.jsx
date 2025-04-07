@@ -24,7 +24,6 @@ function App() {
     const fetchConfiguration = async () => {
       try {
         const response = await axios.get("/configuration");
-        console.log("configuration data: ", response.data.images.secure_base_url + "original");
         dispatch(setImageUrl(response.data.images.secure_base_url + "original"));
       } catch (error) {
         console.log("configuration error:", error);
@@ -38,7 +37,7 @@ function App() {
   return (
     <main className="pb-14 lg:pb-0">
       <Header />
-      <div className="pt-16">
+      <div>
         <Outlet />
       </div>
       <Footer />
