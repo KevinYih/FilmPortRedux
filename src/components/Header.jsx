@@ -46,7 +46,7 @@ const Header = () => {
             </button>
           </form>
 
-          <div className="overflow-hidden cursor-pointer active:scale-50 transition-all">
+          <div className="overflow-hidden cursor-pointer active:scale-90 transition-all">
             <FilmportUserIcon />
           </div>
         </div>

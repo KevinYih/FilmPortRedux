@@ -25,7 +25,7 @@ const BannerHome = () => {
     stopAutoSlide();
     intervalRef.current = setInterval(() => {
       setCurrentShow((prev) => (prev + 1) % bannerLength);
-    }, 4000);
+    }, 5000);
   }, [stopAutoSlide, bannerLength]);
 
   const handlePrev = () => {
