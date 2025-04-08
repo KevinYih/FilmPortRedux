@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import StarRating from "./StarRating";
 import moment from "moment";
 
-const Card = ({ trData, isTrending, index, onHoverChange = () => {} }) => {
+const Card = ({ trData, isTrending, index}) => {
   const imageUrl = useSelector((state) => state.filmData.imageUrl);
 
   return (
-    <div className="w-full min-w-[230px] max-w-[230px] h-90 overflow-hidden rounded relative group" onMouseEnter={() => onHoverChange(true)} onMouseLeave={() => onHoverChange(false)}>
-      <img src={imageUrl + trData?.poster_path} alt="shows" className="w-full h-full object-cover hover:scale-105 transition-transform" />
+    <div className="w-full min-w-[230px] max-w-[230px] h-90 overflow-hidden rounded relative group cursor-pointer">
+      <img src={imageUrl + trData?.poster_path} alt="shows" className=" hover:scale-105 transition-transform duration-300 w-full h-full object-cover" />
 
       {isTrending && (
         <div className="absolute top-4 py-1 px-2 bg-gradient-to-r from-orange-500 to-transparent text-white text-sm rounded-r">

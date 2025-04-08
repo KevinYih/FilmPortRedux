@@ -2,38 +2,54 @@ import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 
 const XScrollCard = ({ data = [], heading = "" }) => {
-  const scrollRef = useRef(null);
+  const containerRef = useRef(null);
+  const animationRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [x, setX] = useState(0);
+
+  const speed = 1; // The number of pixels moved per frame, adjustable speed
+
+  const fullData = [...data, ...data]; // Clone a piece of content for seamless looping
 
   useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    let animationFrameId;
+    const animate = () => {
+      if (!isPaused && containerRef.current) {
+        setX((prev) => {
+          const container = containerRef.current;
+          const totalWidth = container.scrollWidth / 2;
+          const next = prev - speed;
 
-    const scroll = () => {
-      if (!scrollContainer || isPaused) return;
-
-      scrollContainer.scrollLeft += 1;
-
-      // If you scroll to the far right, the loop starts from the beginning
-      if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
-        scrollContainer.scrollLeft = 0;
+          return Math.abs(next) >= totalWidth ? 0 : next;
+        });
       }
 
-      animationFrameId = requestAnimationFrame(scroll);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationFrameId = requestAnimationFrame(scroll);
-
-    return () => cancelAnimationFrame(animationFrameId);
+    animationRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationRef.current);
   }, [isPaused]);
+
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
 
   return (
     <div className="container mx-auto px-3 my-10">
       <h2 className="text-xl lg:text-2xl font-bold mb-3">{heading}</h2>
       <div className="overflow-hidden">
-        <div ref={scrollRef} className="grid grid-cols-[repeat(auto-fit,_230px)] grid-flow-col gap-6 overflow-x-scroll scrollbar-hide scroll-smooth">
-          {data.map((trData, index) => (
-            <Card key={trData.id + "heading" + index} trData={trData} index={index + 1} isTrending={true} onHoverChange={setIsPaused} />
+        <div
+          className="flex gap-6 w-max"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          ref={containerRef}
+          style={{
+            transform: `translateX(${x}px)`,
+            transition: "none",
+          }}>
+          {fullData.map((trData, index) => (
+            <div key={trData.id + "-scroll-" + index}>
+              <Card trData={trData} index={(index % data.length) + 1} isTrending={true} />
+            </div>
           ))}
         </div>
       </div>
