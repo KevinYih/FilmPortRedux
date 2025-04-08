@@ -13,11 +13,11 @@ function StarRating({ rating = 0 }) {
   const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0);
 
   for (let i = 0; i < fullStars; i++) {
-    stars.push(<IoIosStar key={`full-${i}`} fill="currentColor" className="w-5 h-5 text-orange-400" />);
+    stars.push(<IoIosStar key={`full-${i}`} className="w-5 h-5 text-orange-400" />);
   }
 
   if (hasHalfStar) {
-    stars.push(<IoIosStarHalf key="half" fill="currentColor" className="w-5 h-5 text-orange-400" />);
+    stars.push(<IoIosStarHalf key="half" className="w-5 h-5 text-orange-400" />);
   }
 
   for (let i = 0; i < emptyStars; i++) {
