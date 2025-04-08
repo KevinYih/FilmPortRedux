@@ -9,3 +9,11 @@ body {
   font-family: "Poppins", "sans-serif";
   @apply bg-neutral-900 text-neutral-300;
 }
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
