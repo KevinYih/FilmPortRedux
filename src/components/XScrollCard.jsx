@@ -35,7 +35,7 @@ const XScrollCard = ({ data = [], heading = "", trending }) => {
 
   return (
     <div className="container mx-auto px-3 my-10">
-      <h2 className="text-xl lg:text-2xl font-bold mb-3 ">{heading}</h2>
+      <h2 className="text-xl lg:text-2xl font-bold mb-3 text-gray-300">{heading}</h2>
       <div className="overflow-hidden">
         <div
           className="flex gap-6 w-max"

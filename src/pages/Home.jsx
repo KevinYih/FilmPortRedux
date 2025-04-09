@@ -14,9 +14,9 @@ const Home = () => {
   return (
     <div>
       <BannerHome />;
-      <XScrollCard data={trendingData} heading="Must-Watch Shows" trending={true} />
-      <XScrollCard data={nowPlayData} heading="Fresh Releases" />
-      <XScrollCard data={topRatedData} heading="Highest Rated Films" />
+      <XScrollCard data={trendingData} heading="Movie: Must-Watch Shows" trending={true} />
+      <XScrollCard data={nowPlayData} heading="Movie: Fresh Releases" />
+      <XScrollCard data={topRatedData} heading="Movie: Highest Rated Films" />
       <XScrollCard data={tvOnAir} heading="TV Series: On The Air" />
       <XScrollCard data={topRatedTv} heading="TV Series: Top Rated" />
     </div>

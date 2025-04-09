@@ -9,7 +9,7 @@ const Card = ({ trData, isTrending, index }) => {
 
   return (
     <Link to={"/" + trData.media_type + "/" + trData.id}>
-      <div className="w-full min-w-[230px] max-w-[230px] h-90 overflow-hidden rounded relative group cursor-pointer">
+      <div className="w-full min-w-[230px] max-w-[230px] h-75 overflow-hidden rounded relative group cursor-pointer">
         <img src={imageUrl + trData?.poster_path} alt="shows" className=" hover:scale-105 transition-transform duration-300 w-full h-full object-cover" />
 
         {isTrending && (

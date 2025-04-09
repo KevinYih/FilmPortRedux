@@ -20,7 +20,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full h-16 bg-black opacity-80 flex  items-center z-40 ">
+    <header className="fixed top-0 w-full h-16 bg-black opacity-80 backdrop-blur-2xl flex  items-center z-40 ">
       <div className="container mx-auto flex items-center space-x-6 px-4">
         <Link to={"/"}>
           <FilmportLogo />
