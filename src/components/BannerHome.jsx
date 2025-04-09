@@ -8,7 +8,7 @@ const BannerHome = () => {
   const bannerData = useSelector((state) => state.filmData.bannerData);
   const imageUrl = useSelector((state) => state.filmData.imageUrl);
   const [currentShow, setCurrentShow] = useState(0);
-  console.log("banner Home", bannerData);
+
   const bannerLength = bannerData.length;
   const intervalRef = useRef(null);
 
@@ -48,10 +48,9 @@ const BannerHome = () => {
     <section className="w-full h-full">
       <div className="flex min-h-full max-h-[95vh] overflow-hidden">
         {bannerData.map((data, index) => {
-          console.log(index);
           return (
             <div className="min-w-full min-h-[450px] lg:min-h-full relative group transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentShow * 100}%)` }}>
-              <div key={data.backdrop_path} className="w-full h-full overflow-hidden ">
+              <div key={data.backdrop_path + index} className="w-full h-full overflow-hidden ">
                 <img src={imageUrl + data.backdrop_path} className="h-full w-full object-cover" alt="movies" />
               </div>
 

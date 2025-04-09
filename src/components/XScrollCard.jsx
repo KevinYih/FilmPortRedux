@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 
-const XScrollCard = ({ data = [], heading = "" }) => {
+const XScrollCard = ({ data = [], heading = "", trending }) => {
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
   const [x, setX] = useState(0);
 
-  const speed = 1; // The number of pixels moved per frame, adjustable speed
+  const speed = 2; // The number of pixels moved per frame, adjustable speed
 
   const fullData = [...data, ...data]; // Clone a piece of content for seamless looping
 
@@ -35,7 +35,7 @@ const XScrollCard = ({ data = [], heading = "" }) => {
 
   return (
     <div className="container mx-auto px-3 my-10">
-      <h2 className="text-xl lg:text-2xl font-bold mb-3">{heading}</h2>
+      <h2 className="text-xl lg:text-2xl font-bold mb-3 ">{heading}</h2>
       <div className="overflow-hidden">
         <div
           className="flex gap-6 w-max"
@@ -48,7 +48,7 @@ const XScrollCard = ({ data = [], heading = "" }) => {
           }}>
           {fullData.map((trData, index) => (
             <div key={trData.id + "-scroll-" + index}>
-              <Card trData={trData} index={(index % data.length) + 1} isTrending={true} />
+              <Card trData={trData} index={(index % data.length) + 1} isTrending={trending} />
             </div>
           ))}
         </div>
