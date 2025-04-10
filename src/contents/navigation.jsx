@@ -14,6 +14,12 @@ export const navigation = [
     href: "/movie",
     icon: <MdOutlineLocalMovies />,
   },
+
+  {
+    label: "test",
+    href: "/test",
+    icon: <MdOutlineLocalMovies />,
+  },
 ];
 
 export const mobileNavigation = [

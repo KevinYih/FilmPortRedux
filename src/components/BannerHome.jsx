@@ -49,8 +49,8 @@ const BannerHome = () => {
       <div className="flex min-h-full max-h-[95vh] overflow-hidden">
         {bannerData.map((data, index) => {
           return (
-            <div className="min-w-full min-h-[450px] lg:min-h-full relative group transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentShow * 100}%)` }}>
-              <div key={data.backdrop_path + index} className="w-full h-full overflow-hidden ">
+            <div key={data.backdrop_path + index} className="min-w-full min-h-[450px] lg:min-h-full relative group transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentShow * 100}%)` }}>
+              <div className="w-full h-full overflow-hidden ">
                 <img src={imageUrl + data.backdrop_path} className="h-full w-full object-cover" alt="movies" />
               </div>
 
@@ -71,9 +71,9 @@ const BannerHome = () => {
                   <h2 className="font-bold text-2xl mb-3 lg:text-4xl text-white drop-shadow-amber-300 ">{data?.title || data?.name}</h2>
                   <p className="text-ellipsis line-clamp-3 my-2">{data.overview}</p>
                   <div className="flex items-center space-x-5">
-                    <p>
+                    <div>
                       <StarRating rating={data.vote_average} />
-                    </p>
+                    </div>
 
                     <button className="text-neutral-600 text-5xl lg:text-6xl font-bold rounded-sm z-20 cursor-pointer hover:text-orange-500 hover:scale-103 shadow-orange-400 transition-all">
                       <MdOutlineSmartDisplay />

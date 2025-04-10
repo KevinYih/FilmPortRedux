@@ -6,7 +6,7 @@ import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-gray-400 text-sm py-6 mt-6 border-t">
+    <footer className="bg-gradient-to-t from-black to-neutral-900 text-gray-400 text-sm py-6 mt-6 ">
       {/* 页脚链接 */}
 
       {/* TMDB Attribution */}

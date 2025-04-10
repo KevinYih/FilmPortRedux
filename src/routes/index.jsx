@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
 import ExplorePage from "../pages/ExplorePage";
@@ -11,9 +11,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "", element: <Home /> },
-      { path: "explore", element: <ExplorePage /> },
-      { path: "explore/:id", element: <DetailsPage /> },
+      { path: ":explore", element: <ExplorePage /> },
+      { path: ":explore/:id", element: <DetailsPage /> },
       { path: "search", element: <SearchPage /> },
+      { path: "test", element: <Home /> },
     ],
   },
 ]);
