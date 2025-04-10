@@ -7,18 +7,25 @@ import { navigation } from "../contents/navigation";
 
 const Header = () => {
   const location = useLocation();
-  const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
-  const [searchInput, setSearchInput] = useState(removeSpace);
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("q");
+
+  //const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
+  const [searchInput, setSearchInput] = useState(query);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (searchInput) {
-      navigate(`/search?q=${searchInput}`);
-    }
-  }, [searchInput]);
+  // useEffect(() => {
+  //   if (searchInput) {
+  //     navigate(`/search?q=${searchInput}`);
+  //   }
+  // }, [searchInput]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (searchInput) {
+      navigate(`/search?q=${searchInput}`);
+    }
+    setSearchInput("");
   };
 
   return (

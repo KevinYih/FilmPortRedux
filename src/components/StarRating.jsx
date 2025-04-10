@@ -9,8 +9,14 @@ function StarRating({ rating = 0 }) {
   const starValue = (rating / 10) * maxStars;
 
   const fullStars = Math.floor(starValue);
-  const hasHalfStar = starValue - fullStars >= 0.25 && starValue - fullStars <= 0.75;
-  const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0);
+
+  console.log("Math.floor(starValue):", Math.floor(3.4));
+
+  const hasHalfStar = starValue - fullStars > 0.25 && starValue - fullStars <= 0.75;
+
+  // if(hasHalfStar )
+  // const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0);
+  const emptyStars = maxStars - fullStars - hasHalfStar;
 
   for (let i = 0; i < fullStars; i++) {
     stars.push(<IoIosStar key={`full-${i}`} className="w-5 h-5 text-orange-400" />);
@@ -27,7 +33,7 @@ function StarRating({ rating = 0 }) {
   return (
     <div className="flex items-center space-x-1">
       {stars}
-      <span className="text-sm text-neutral-500 ml-2">{rating.toFixed(1)} / 10</span>
+      <span className="text-sm text-neutral-100 ml-2">{rating.toFixed(1)} / 10</span>
     </div>
   );
 }

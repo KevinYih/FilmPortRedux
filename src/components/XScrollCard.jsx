@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 
-const XScrollCard = ({ data = [], heading = "", trending }) => {
+const XScrollCard = ({ data = [], heading = "", trending, mediaType }) => {
   const scrollContainerRef = useRef(null);
   const CARD_WIDTH = 230;
   const handlePrev = () => {
@@ -30,7 +30,7 @@ const XScrollCard = ({ data = [], heading = "", trending }) => {
         <div ref={scrollContainerRef} className="flex gap-6  overflow-x-auto scroll-smooth scrollbar-hide w-auto">
           {data.map((trData, index) => (
             <div key={trData.id + "-scroll-" + index}>
-              <Card trData={trData} index={(index % data.length) + 1} isTrending={trending} />
+              <Card trData={trData} index={(index % data.length) + 1} isTrending={trending} media_type={mediaType} />
             </div>
           ))}
         </div>

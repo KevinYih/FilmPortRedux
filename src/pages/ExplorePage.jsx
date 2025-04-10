@@ -22,7 +22,7 @@ const ExplorePage = () => {
     setIsFetching(true);
     try {
       const response = await axios.get(`/discover/${params.explore}`, {
-        params: { page: pageNo },
+        params: { page: 1 },
       });
 
       setData((prev) => [...prev, ...response.data.results]);
@@ -47,6 +47,8 @@ const ExplorePage = () => {
       setPageNo((prev) => prev + 1);
     }
   }, [isFetching]);
+
+  console.log("explore.data:", data);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);

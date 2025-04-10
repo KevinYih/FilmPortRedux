@@ -4,6 +4,7 @@ import tmdbLogo from "../assets/tmdbLogo.svg";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
+
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-t from-black to-neutral-900 text-gray-400 text-sm py-6 mt-6 ">
