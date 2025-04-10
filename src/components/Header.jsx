@@ -22,13 +22,13 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full h-16 bg-black bg-opacity-50 z-40">
-      <div className="container mx-auto flex items-center space-x-6 px-4">
+    <header className="fixed top-0 w-full h-18 bg-black bg-opacity-50 z-40">
+      <div className="container mx-auto flex items-center h-full  space-x-6 px-4">
         <Link to={"/"}>
           <FilmportLogo />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 ml-5">
+        <nav className="hidden lg:flex items-center gap-1 ml-5 font-semibold">
           {navigation.map((nav, index) => {
             return (
               <div key={nav.label + "header" + index}>

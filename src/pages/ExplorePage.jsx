@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../components/Card";
 
@@ -8,50 +8,50 @@ const ExplorePage = () => {
   const [pageNo, setPageNo] = useState(1);
   const [data, setData] = useState([]);
   const [totalPageNo, setTotalPageNo] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
 
-  console.log("params.explore + params", params.explore);
+  // switching pages, initialization.
+  useEffect(() => {
+    setPageNo(1);
+    setData([]);
+  }, [params.explore]);
+
+  const fetchData = useCallback(async () => {
+    if (isFetching || (totalPageNo && pageNo > totalPageNo)) return;
+
+    setIsFetching(true);
+    try {
+      const response = await axios.get(`/discover/${params.explore}`, {
+        params: { page: pageNo },
+      });
+
+      setData((prev) => [...prev, ...response.data.results]);
+      setTotalPageNo(response.data.total_pages);
+    } catch (error) {
+      console.log("Fetch Error:", error);
+    } finally {
+      setIsFetching(false);
+    }
+  }, [pageNo, params.explore, isFetching, totalPageNo]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/discover/${params.explore}`, {
-          params: {
-            page: pageNo,
-          },
-        });
-        setData((preve) => {
-          return [...preve, ...response.data.results];
-        });
-        setTotalPageNo(response.data.total_pages);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-
-    setData([]);
     fetchData();
-  }, [pageNo, params.explore]);
+  }, [fetchData]);
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [pageNo]);
+  const handleScroll = useCallback(() => {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight;
 
-  // useEffect(() => {
-  //   setPageNo(1);
-  //   setData([]);
-  //   fetchData();
-  // }, [pageNo, params.explore]);
+    if (scrollTop + windowHeight >= fullHeight - 100 && !isFetching) {
+      setPageNo((prev) => prev + 1);
+    }
+  }, [isFetching]);
 
-  // const handleScroll = () => {
-  //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-  //     setPageNo((prev) => prev + 1);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   return (
     <div className="pt-16">
@@ -59,10 +59,12 @@ const ExplorePage = () => {
         <h3 className="capitalize font-semibold text-lg lg:text-2xl my-3">Popular {params.explore}</h3>
 
         <div className="grid grid-cols-[repeat(auto-fit,_minmax(230px,_1fr))] gap-6">
-          {data.map((exploreData, index) => {
-            return <Card trData={exploreData} key={exploreData.id + "exploeredata" + index} media_type={params.explore} />;
-          })}
+          {data.map((exploreData, index) => (
+            <Card trData={exploreData} key={exploreData.id + "exploeredata" + index} media_type={params.explore} />
+          ))}
         </div>
+
+        {isFetching && <p className="text-center text-gray-400 mt-4">loading...</p>}
       </div>
     </div>
   );
