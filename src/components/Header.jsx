@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FilmportLogo from "./FilmportLogo";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import FilmportUserIcon from "./FilmportUserIcon";
@@ -13,12 +13,6 @@ const Header = () => {
   //const removeSpace = location?.search?.slice(3)?.split("%20")?.join(" ");
   const [searchInput, setSearchInput] = useState(query);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (searchInput) {
-  //     navigate(`/search?q=${searchInput}`);
-  //   }
-  // }, [searchInput]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,8 +42,8 @@ const Header = () => {
         </nav>
 
         <div className="ml-auto flex items-center gap-5">
-          <form className="flex items-center gap-2" onSubmit={handleSubmit}>
-            <input type="text" placeholder="Search here..." className="bg-transparent px-4 py-1 outline-none border-none hidden lg:block" onChange={(e) => setSearchInput(e.target.value)} value={searchInput} />
+          <form className="hidden items-center gap-2  lg:block" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Search here..." className="bg-transparent px-4 py-1 outline-none border-none " onChange={(e) => setSearchInput(e.target.value)} value={searchInput} />
             <button className="text-3xl cursor-pointer">
               <IoSearch />
             </button>

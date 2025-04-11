@@ -56,11 +56,11 @@ const ExplorePage = () => {
   }, [handleScroll]);
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
       <div className="container mx-auto my-2">
         <h3 className="capitalize font-semibold text-lg lg:text-2xl my-3">Popular {params.explore}</h3>
 
-        <div className="grid grid-cols-[repeat(auto-fit,_minmax(230px,_1fr))] gap-6">
+        <div className="grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center">
           {data.map((exploreData, index) => (
             <Card trData={exploreData} key={exploreData.id + "exploeredata" + index} media_type={params.explore} />
           ))}

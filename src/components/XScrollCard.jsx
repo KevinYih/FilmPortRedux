@@ -34,7 +34,7 @@ const XScrollCard = ({ data = [], heading = "", trending, mediaType }) => {
             </div>
           ))}
         </div>
-        <div className="absolute top-0 w-full h-full z-30 flex items-center justify-between pointer-events-none">
+        <div className="absolute top-0 w-full h-full  flex items-center justify-between pointer-events-none">
           <button onClick={handlePrev} className="pointer-events-auto cursor-pointer text-5xl lg:text-6xl text-neutral-400 hover:text-orange-500 transition ">
             <IoIosArrowDropleftCircle />
           </button>
