@@ -6,12 +6,11 @@ import { IoSearch } from "react-icons/io5";
 
 const SearchPage = () => {
   const location = useLocation();
-  console.log("location :", location);
+
   const searchParams = new URLSearchParams(location.search);
   const query = "" + searchParams.get("q");
-  console.log("query :", query);
+
   const [data, setData] = useState([]);
-  console.log("searchData:", data);
 
   const [searchInput, setSearchInput] = useState(query);
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ const SearchPage = () => {
     const fetchData = async () => {
       if (!query?.trim()) return;
       try {
-        const response = await axios.get(`/search/collection`, {
+        const response = await axios.get(`/search/multi`, {
           params: {
             query: query,
             include_adult: false,

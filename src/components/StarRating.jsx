@@ -8,21 +8,26 @@ function StarRating({ rating = 0 }) {
   const stars = [];
   const starValue = (rating / 10) * maxStars;
 
-  const fullStars = Math.floor(starValue);
+  let fullStars = Math.floor(starValue);
+  let emptyStars = Math.floor(maxStars - starValue);
+  let halfStars = 0;
+  const counter = starValue - fullStars;
 
-  console.log("Math.floor(starValue):", Math.floor(3.4));
-
-  const hasHalfStar = starValue - fullStars > 0.25 && starValue - fullStars <= 0.75;
-
+  if (counter > 0.75) {
+    fullStars++;
+  } else if (counter < 0.25) {
+    emptyStars++;
+  } else {
+    halfStars++;
+  }
   // if(hasHalfStar )
   // const emptyStars = maxStars - fullStars - (hasHalfStar ? 1 : 0);
-  const emptyStars = maxStars - fullStars - hasHalfStar;
 
   for (let i = 0; i < fullStars; i++) {
     stars.push(<IoIosStar key={`full-${i}`} className="w-5 h-5 text-orange-400" />);
   }
 
-  if (hasHalfStar) {
+  if (halfStars) {
     stars.push(<IoIosStarHalf key="half" className="w-5 h-5 text-orange-400" />);
   }
 

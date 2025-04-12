@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Card from "./Card";
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 
-const XScrollCard = ({ data = [], heading = "", trending, mediaType }) => {
+const XScrollCard = ({ data = [], loading, heading = "", trending, mediaType }) => {
   const scrollContainerRef = useRef(null);
   const CARD_WIDTH = 230;
   const handlePrev = () => {
@@ -22,6 +22,8 @@ const XScrollCard = ({ data = [], heading = "", trending, mediaType }) => {
       });
     }
   };
+
+  if (loading) return <p>Loding ...</p>;
 
   return (
     <div className="container mx-auto px-3 my-10">
