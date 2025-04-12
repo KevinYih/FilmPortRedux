@@ -55,7 +55,7 @@ const BannerHome = () => {
               </div>
 
               {/**previous & next**/}
-              <div className="absolute top-0 w-full h-full z-30 hidden items-center justify-between pointer-events-none  group-hover:lg:flex transition">
+              <div className="absolute top-0 w-full h-full z-30 flex items-center justify-between pointer-events-none  group-hover: transition">
                 <button onClick={handlePrev} className="pointer-events-auto cursor-pointer text-6xl hover:scale-106 text-neutral-500 hover:text-orange-500 transition-colors duration-300 px-4">
                   <IoIosArrowBack />
                 </button>

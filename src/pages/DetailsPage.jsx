@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useLocation, useParams } from "react-router";
-//import axios from "axios";  useEffect
 import useFetchDetails from "../hooks/useFetchDetails";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import Divider from "../components/Driver";
 import useFetch from "../hooks/useFetch";
 import XScrollCard from "../components/xScrollCard";
+import StarRating from "../components/StarRating";
+import VideoPlay from "../components/VideoPlay";
+import { MdOutlineSmartDisplay } from "react-icons/md";
 
 const DetailsPage = () => {
   const params = useParams();
@@ -29,25 +31,6 @@ const DetailsPage = () => {
     setPlayVideo(true);
   };
 
-  // console.log("detailsData:", detailsData);
-  // const { responseData: detailsDataPath } = useFetch(path);
-  // console.log("path detailsData:", detailsDataPath);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setLoadi(true);
-  //     try {
-  //       const response = await axios.get(path);
-  //       setRespData(response.data);
-  //     } catch (error) {
-  //       console.log("error: ", error);
-  //     } finally {
-  //       setLoadi(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [path]);
-
   console.log("detailsData:", data);
   console.log("detailsDataCredit:", castData);
 
@@ -56,6 +39,11 @@ const DetailsPage = () => {
   const duration = (data?.runtime / 60)?.toFixed(1)?.split(".");
   const writer = castData?.crew
     ?.filter((el) => el?.job === "Writer")
+    ?.map((el) => el?.name)
+    ?.join(", ");
+
+  const director = castData?.crew
+    ?.filter((el) => el?.job === "Director")
     ?.map((el) => el?.name)
     ?.join(", ");
 
@@ -69,10 +57,11 @@ const DetailsPage = () => {
       </div>
 
       <div className="container mx-auto px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10 ">
-        <div className="relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60">
-          <img src={imageUrL + data?.poster_path} className="h-80 w-60 object-cover rounded" />
-          <button onClick={() => handlePlayVideo(data)} className="mt-3 w-full py-2 px-4 text-center bg-white text-black rounded font-bold text-lg hover:bg-gradient-to-l from-red-500 to-orange-500 hover:scale-105 transition-all">
-            Play Now
+        <div className="relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60 ">
+          <img src={imageUrL + data?.poster_path} className="h-80 w-60 object-cover rounded lg:mb-5 " />
+
+          <button onClick={() => handlePlayVideo(data)} className="flex w-full justify-center text-neutral-600 text-5xl lg:text-6xl font-bold rounded-sm z-20 cursor-pointer hover:text-orange-500 hover:scale-103 shadow-orange-400 transition-all">
+            <MdOutlineSmartDisplay size={80} />
           </button>
         </div>
 
@@ -83,7 +72,10 @@ const DetailsPage = () => {
           <Divider />
 
           <div className="flex items-center gap-3">
-            <p>Rating : {Number(data?.vote_average).toFixed(1)}+</p>
+            <p>Rating :</p>
+            <span>
+              <StarRating rating={data?.vote_average} />
+            </span>
             <span>|</span>
             <p>View : {Number(data?.vote_count)}</p>
             <span>|</span>
@@ -112,7 +104,7 @@ const DetailsPage = () => {
 
           <div>
             <p>
-              <span className="text-white">Director</span> : {castData?.crew[0]?.name}
+              <span className="text-white">Director : {director}</span>
             </p>
 
             <Divider />
@@ -143,10 +135,10 @@ const DetailsPage = () => {
       </div>
 
       <div>
-        <XScrollCard data={similarData} heading={"Similar " + params?.explore} media_type={params?.explore} />
+        <XScrollCard data={similarData} heading={"Recommendation " + params?.explore} media_type={params?.explore} />
       </div>
 
-      {/* {playVideo && <VideoPlay data={playVideoId} close={() => setPlayVideo(false)} media_type={params?.explore} />} */}
+      {playVideo && <VideoPlay data={playVideoId} close={() => setPlayVideo(false)} media_type={params?.explore} />}
     </div>
   );
 };
