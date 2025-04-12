@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import StarRating from "./StarRating";
 import { MdOutlineSmartDisplay } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { Link } from "react-router";
 
 const BannerHome = () => {
   const bannerData = useSelector((state) => state.filmData.bannerData);
@@ -75,9 +76,9 @@ const BannerHome = () => {
                       <StarRating rating={data.vote_average} />
                     </div>
 
-                    <button className="text-neutral-600 text-5xl lg:text-6xl font-bold rounded-sm z-20 cursor-pointer hover:text-orange-500 hover:scale-103 shadow-orange-400 transition-all">
+                    <Link to={`/${data.media_type}/${data.id}`} className="text-neutral-600 text-5xl lg:text-6xl font-bold rounded-sm z-20 cursor-pointer hover:text-orange-500 hover:scale-103 shadow-orange-400 transition-all">
                       <MdOutlineSmartDisplay />
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
