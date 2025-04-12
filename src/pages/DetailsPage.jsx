@@ -9,6 +9,8 @@ import XScrollCard from "../components/xScrollCard";
 import StarRating from "../components/StarRating";
 import VideoPlay from "../components/VideoPlay";
 import { MdOutlineSmartDisplay } from "react-icons/md";
+import nullPic from "../assets/nullPicpng.png";
+import XScrollCast from "../components/XScrollCast";
 
 const DetailsPage = () => {
   const params = useParams();
@@ -17,7 +19,7 @@ const DetailsPage = () => {
   console.log("location.pathname:", location.pathname);
   const [playVideo, setPlayVideo] = useState(false);
   const [playVideoId, setPlayVideoId] = useState("");
-  const { responseData: similarData } = useFetch(`/${params?.explore}/${params?.id}/similar`);
+  const { responseData: similarData, loading } = useFetch(`/${params?.explore}/${params?.id}/similar`);
   // const [respData, setRespData] = useState([]);
   // const [loadi, setLoadi] = useState(false);
 
@@ -37,10 +39,10 @@ const DetailsPage = () => {
   if (movieLoading || creditLoading) return <div className="py-100 flex items-center justify-center text-4xl">loading...</div>;
 
   const duration = (data?.runtime / 60)?.toFixed(1)?.split(".");
-  const writer = castData?.crew
-    ?.filter((el) => el?.job === "Writer")
-    ?.map((el) => el?.name)
-    ?.join(", ");
+  // const writer = castData?.crew
+  //   ?.filter((el) => el?.job === "Writer")
+  //   ?.map((el) => el?.name)
+  //   ?.join(", ");
 
   const director = castData?.crew
     ?.filter((el) => el?.job === "Director")
@@ -58,7 +60,7 @@ const DetailsPage = () => {
 
       <div className="container mx-auto px-3 py-16 lg:py-0 flex flex-col lg:flex-row gap-5 lg:gap-10 ">
         <div className="relative mx-auto lg:-mt-28 lg:mx-0 w-fit min-w-60 ">
-          <img src={imageUrL + data?.poster_path} className="h-80 w-60 object-cover rounded lg:mb-5 " />
+          <img src={!data?.poster_path ? nullPic : imageUrL + data?.poster_path} className="h-80 w-60 object-cover rounded lg:mb-5 " />
 
           <button onClick={() => handlePlayVideo(data)} className="flex w-full justify-center text-neutral-600 text-5xl lg:text-6xl font-bold rounded-sm z-20 cursor-pointer hover:text-orange-500 hover:scale-103 shadow-orange-400 transition-all">
             <MdOutlineSmartDisplay size={80} />
@@ -72,12 +74,9 @@ const DetailsPage = () => {
           <Divider />
 
           <div className="flex items-center gap-3">
-            <p>Rating :</p>
-            <span>
-              <StarRating rating={data?.vote_average} />
-            </span>
-            <span>|</span>
-            <p>View : {Number(data?.vote_count)}</p>
+            <StarRating rating={data?.vote_average} />
+            {/* <span>|</span>
+            <p>View : {Number(data?.vote_count)}</p> */}
             <span>|</span>
             <p>
               Duration : {duration[0]}h {duration[1]}m
@@ -107,17 +106,17 @@ const DetailsPage = () => {
               <span className="text-white">Director : {director}</span>
             </p>
 
-            <Divider />
+            {/* <Divider />
 
             <p>
               <span className="text-white">Writer : {writer}</span>
-            </p>
+            </p> */}
           </div>
 
           <Divider />
 
           <h2 className="font-bold text-lg">Cast :</h2>
-          <div className="grid grid-cols-[repeat(auto-fit,96px)] gap-5 my-4">
+          {/* <div className="grid grid-cols-[repeat(auto-fit,96px)] gap-5 my-4">
             {castData?.cast
               ?.filter((el) => el?.profile_path)
               .map((starCast, index) => {
@@ -130,12 +129,16 @@ const DetailsPage = () => {
                   </div>
                 );
               })}
-          </div>
+          </div> */}
+
+          {/* const { responseData: castData, loading: creditLoading } = useFetchDetails(`${path}/credits`); */}
+          <XScrollCast data={castData} loading={creditLoading} imageUrL={imageUrL} />
         </div>
       </div>
 
       <div>
-        <XScrollCard data={similarData} heading={"Recommendation " + params?.explore} media_type={params?.explore} />
+        <XScrollCard data={similarData} loading={loading} heading={"Recommendation " + params?.explore} mediaType={params?.explore} />
+        {/* <XScrollCard data={nowPlayData} loading={loading} heading="Movie: Fresh Releases" mediaType={"movie"} />           */}
       </div>
 
       {playVideo && <VideoPlay data={playVideoId} close={() => setPlayVideo(false)} media_type={params?.explore} />}
