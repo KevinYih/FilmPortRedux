@@ -1,13 +1,13 @@
 import BannerHome from "../components/BannerHome";
 import { useSelector } from "react-redux";
 
-import XScrollCard from "../components/xScrollCard";
+import XScrollCard from "../components/XScrollCard";
 import useFetch from "../hooks/useFetch";
 const Home = () => {
   const trendingData = useSelector((state) => state.filmData.bannerData);
 
   const { responseData: nowPlayData, loading: nowPlaying } = useFetch("/movie/now_playing");
-  console.log("nowPlayData:", nowPlayData); 
+  console.log("nowPlayData:", nowPlayData);
   const { responseData: topRatedData, loading: topRating } = useFetch("/movie/top_rated");
   const { responseData: tvOnAir, loading: tvOning } = useFetch("/tv/on_the_air");
   const { responseData: topRatedTv, loading: topTvRating } = useFetch("/tv/top_rated");

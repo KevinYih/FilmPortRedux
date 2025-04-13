@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import tmdbLogo from "../assets/tmdbLogo.svg";
+import tmdbLogo from "../assets/TMDBlogo.svg";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
