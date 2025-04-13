@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../components/Card";
 
@@ -8,27 +8,34 @@ const ExplorePage = () => {
   const [pageNo, setPageNo] = useState(1);
   const [data, setData] = useState([]);
   const [totalPageNo, setTotalPageNo] = useState(0);
-  const [isFetching, setIsFetching] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // switching pages, initialization.
+  console.log("params", params.explore);
 
-  const fetchData = useCallback(async () => {
-    if (isFetching || (totalPageNo && pageNo > totalPageNo)) return;
-
-    setIsFetching(true);
+  const fetchData = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`/discover/${params.explore}`, {
-        params: { page: 1 },
+        params: {
+          page: pageNo,
+        },
       });
-
-      setData((prev) => [...prev, ...response.data.results]);
+      setData((preve) => {
+        return [...preve, ...response.data.results];
+      });
       setTotalPageNo(response.data.total_pages);
     } catch (error) {
-      console.log("Fetch Error:", error);
+      console.log("error", error);
     } finally {
-      setIsFetching(false);
+      setLoading(false);
     }
-  }, [pageNo, params.explore, isFetching, totalPageNo]);
+  };
+
+  const handleScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setPageNo((preve) => preve + 1);
+    }
+  };
 
   useEffect(() => {
     fetchData();
@@ -40,22 +47,9 @@ const ExplorePage = () => {
     fetchData();
   }, [params.explore]);
 
-  const handleScroll = useCallback(() => {
-    const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const fullHeight = document.documentElement.scrollHeight;
-
-    if (scrollTop + windowHeight >= fullHeight - 100 && !isFetching) {
-      setPageNo((prev) => prev + 1);
-    }
-  }, [isFetching]);
-
-  console.log("explore.data:", data);
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   return (
     <div className="pt-20">
@@ -68,7 +62,7 @@ const ExplorePage = () => {
           ))}
         </div>
 
-        {isFetching && <p className="text-center text-gray-400 mt-4">loading...</p>}
+        {loading && <p className="text-center text-gray-400 mt-4">loading...</p>}
       </div>
     </div>
   );
