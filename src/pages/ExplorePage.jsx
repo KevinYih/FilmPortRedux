@@ -31,10 +31,14 @@ const ExplorePage = () => {
   }, [pageNo, params.explore, isFetching, totalPageNo]);
 
   useEffect(() => {
+    fetchData();
+  }, [pageNo]);
+
+  useEffect(() => {
     setPageNo(1);
     setData([]);
     fetchData();
-  }, [params.explore, fetchData]);
+  }, [params.explore]);
 
   const handleScroll = useCallback(() => {
     const scrollTop = window.scrollY;
