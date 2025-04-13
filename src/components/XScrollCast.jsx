@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Card from "./Card";
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 
 const XScrollCast = ({ data = [], loading, imageUrL }) => {
