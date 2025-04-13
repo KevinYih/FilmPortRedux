@@ -11,10 +11,6 @@ const ExplorePage = () => {
   const [isFetching, setIsFetching] = useState(false);
 
   // switching pages, initialization.
-  useEffect(() => {
-    setPageNo(1);
-    setData([]);
-  }, [params.explore]);
 
   const fetchData = useCallback(async () => {
     if (isFetching || (totalPageNo && pageNo > totalPageNo)) return;
@@ -35,8 +31,10 @@ const ExplorePage = () => {
   }, [pageNo, params.explore, isFetching, totalPageNo]);
 
   useEffect(() => {
+    setPageNo(1);
+    setData([]);
     fetchData();
-  }, [fetchData]);
+  }, [params.explore, fetchData]);
 
   const handleScroll = useCallback(() => {
     const scrollTop = window.scrollY;

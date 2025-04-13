@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import Divider from "../components/Driver";
 import useFetch from "../hooks/useFetch";
-import XScrollCard from "../components/xScrollCard";
+import XScrollCard from "../components/XScrollCard";
 import StarRating from "../components/StarRating";
 import VideoPlay from "../components/VideoPlay";
 import { MdOutlineSmartDisplay } from "react-icons/md";
@@ -25,8 +25,9 @@ const DetailsPage = () => {
 
   const path = location.pathname;
 
-  const { responseData: data, loading: movieLoading } = useFetchDetails(path);
-  const { responseData: castData, loading: creditLoading } = useFetchDetails(`${path}/credits`);
+  //const { responseData: data, loading: movieLoading } = useFetchDetails(path);
+  const { responseData: data, loading: movieLoading } = useFetchDetails(`/${params?.explore}/${params?.id}`);
+  const { responseData: castData, loading: creditLoading } = useFetchDetails(`/${params?.explore}/${params?.id}/credits`);
 
   const handlePlayVideo = (data) => {
     setPlayVideoId(data);
